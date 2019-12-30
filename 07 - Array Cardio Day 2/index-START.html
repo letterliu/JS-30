@@ -38,10 +38,26 @@
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    const comment = comments.find(comment => comment.id === 823423);
+    console.dir(comment);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+    const idIndex = comments.findIndex(comment => comment.id === 823423);
+
+    // 第一種過濾方式 index，避免更動原始陣列
+    // const newComments = comments.filter((comment, index) => index !== idIndex);
+    // console.dir(newComments);
+
+    // 第二種過濾方式，深度 copy
+    // const newComments = JSON.parse(JSON.stringify(comments));
+    // newComments.splice(idIndex, 1);
+    // console.dir(newComments);
+
+    // 第三種過濾方式，前後包圍裁割
+    // const newComments = [...comments.slice(0, idIndex), ...comments.slice(idIndex + 1)];
+    // console.dir(newComments);
 
   </script>
 </body>
