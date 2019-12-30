@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+  <script>
+    // API 資料抓取
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    const cities = [];
+    fetch(endpoint)
+      .then(response => response.json())
+      .then(data => cities.push(...data))
+      .catch(error => console.error(error));
+
+    // 主程式運作
+    const searchInput = document.querySelector('.search');
+    const suggestions = document.querySelector('.suggestions');
+
+    searchInput.addEventListener('keyup', displayMatches);
+    // searchInput.addEventListener('change', displayMatches);
+
+    function displayMatches(e) {
+      const wordToMatch = new RegExp(e.target.value, 'gi');
+      const isMatchedArray = findMatches(cities, wordToMatch);
+      const reFlowHtml = isMatchedArray.map(place => {
+        const cityName = place.city.replace(wordToMatch, `<span class="highlight">${this.value}</span>`);
+        const stateName = place.state.replace(wordToMatch, `<span class="highlight">${this.value}</span>`);
+        return `
+    <li>
+      <span class="name">${cityName}, ${stateName}</span>
+      <span class="population">${numberWithCommas(place.population)}</span>
+    </li>
+  `;
+      }).slice().sort().join('');
+      suggestions.innerHTML = reFlowHtml;
+    }
+
+    function findMatches(cities, wordToMatch) {
+      return cities.filter(place => place.city.match(wordToMatch) || place.state.match(wordToMatch));
+    }
+
+    function numberWithCommas(population) {
+      return population.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+    }
+
+  </script>
+
+</body>
+
+</html>

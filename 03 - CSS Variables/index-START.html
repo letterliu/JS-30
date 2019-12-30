@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Scoped CSS Variables and JS</title>
+  <style>
+    /* :root {
+      --base-color: #ffde03;
+      --border: 20px;
+      --blur: 0px;
+    } */
+
+    img {
+      padding: var(--border);
+      background: var(--base-color);
+      filter: blur(var(--blur)) grayscale(var(--grayscale));
+      ;
+    }
+
+    .secondary-color {
+      color: var(--base-color);
+    }
+
+    body {
+      --base-color: #ffde03;
+      --border: 20px;
+      --blur: 0px;
+      --grayscale: 0%;
+      text-align-last: justify;
+      background: var(--base-color);
+      filter: hue-rotate(-90deg);
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 30px;
+    }
+
+    .container {
+      margin: 0 auto;
+      width: 80%;
+      margin-top: 70px;
+
+    }
+
+    h2 {
+      font-size: 5.4vw;
+      margin-top: 16px;
+    }
+
+    .controls {
+      text-align-last: left;
+      display: inline-block;
+      letter-spacing: 1px;
+    }
+
+    input {
+      width: 150px;
+      margin-bottom: 30px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="controls">
+      <label for="border">Border:</label>
+      <input id="border" type="range" name="border" min="10" max="90" value="20" data-sizing="px">
+      <br>
+      <label for="blur">Blur:</label>
+      <input id="blur" type="range" name="blur" min="0" max="25" value="0" data-sizing="px">
+      <br>
+      <label for="grayscale">grayscale:</label>
+      <input id="grayscale" type="range" name="grayscale" min="0" max="100" value="0" data-sizing="%">
+      <br>
+      <label for="base-color">Base Color</label>
+      <input id="base-color" type="color" name="base-color" value="#ffc600">
+    </div>
+    <div class="controls">
+      <img src="https://source.unsplash.com/random/800x500">
+    </div>
+    <h2>Update <span class='secondary-color'>CSS</span> Variables with <span class='secondary-color'>JS</span></h2>
+  </div>
+  <script>
+    const inputs = document.querySelectorAll('.controls input');
+    // const container = document.querySelector('body');
+    // console.dir(window.getComputedStyle(test));
+
+    function handleUpdate(e) {
+      console.dir(e);
+      const suffix = e.target.dataset.sizing || '';
+      document.body.style.setProperty(`--${e.target.name}`, e.target.value + suffix);
+      // document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    inputs.forEach(input => input.addEventListener('input', handleUpdate));
+    // inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    // inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+  <style>
+    body {
+      background: url(https://images.unsplash.com/photo-1543120975-32778f909233?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80) center center / cover;
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 40rem;
+      height: 40rem;
+      border: 3px solid white;
+      border-radius: 48.5%;
+      margin: 0 auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      /* transform: translateY(-3px); */
+
+      /* account for the height of the clock hands */
+    }
+
+    .clock-face:before {
+      content: '';
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #fff;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      position: absolute;
+    }
+
+    .hand {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      /* transition: all 0.05s; */
+    }
+
+    .hour-hand::before {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 30%;
+      background: #fff;
+      left: 50%;
+      bottom: 50%;
+      transform: translate(-50%, 0);
+      /* box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1); */
+    }
+
+    .minute-hand::before {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 45%;
+      background: #fff;
+      left: 50%;
+      bottom: 50%;
+      transform: translate(-50%, 0);
+      /* box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1); */
+    }
+
+    .second-hand::before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 50%;
+      background: #fff;
+      left: 50%;
+      bottom: 50%;
+      transform: translate(-50%, 0);
+      /* box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1); */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand minute-hand"></div>
+      <div class="hand second-hand"></div>
+    </div>
+  </div>
+
+  <script>
+    ; (function () {
+
+      function setDate() {
+        const time = new Date, currentTime = {}, currentAngle = {};
+
+        const secondHand = document.querySelector('.second-hand');
+        currentTime.seconds = time.getSeconds();
+        currentAngle.secondsDegrees = currentTime.seconds / 60 * 360;
+        secondHand.style.transform = `rotate(${currentAngle.secondsDegrees}deg)`;
+
+        const minuteHand = document.querySelector('.minute-hand');
+        currentTime.minutes = time.getMinutes();
+        currentAngle.minutesDegrees = (currentTime.minutes / 60 * 360) + (currentTime.seconds * 6 / 60);
+        minuteHand.style.transform = `rotate(${currentAngle.minutesDegrees}deg)`;
+
+        const hourHand = document.querySelector('.hour-hand');
+        currentTime.hours = time.getHours();
+        currentAngle.hoursDegrees = (currentTime.hours / 12 * 360) + (currentTime.minutes * 30 / 60);
+        hourHand.style.transform = `rotate(${currentAngle.hoursDegrees}deg)`;
+      }
+
+      setDate();
+
+      function animationHandler() {
+        setDate();
+        window.requestAnimationFrame(animationHandler);
+      }
+
+      window.requestAnimationFrame(animationHandler);
+
+      // setInterval(setDate, 1000);
+    })();
+
+  </script>
+
+  <!-- <script>
+    ;(function () {
+      const second = document.querySelector('.second-hand');
+      const minute = document.querySelector('.minute-hand');
+      const hour = document.querySelector('.hour-hand');
+
+      function setLock() {
+        const data = new Date();
+        console.log(data)
+        const secondDeg = (data.getSeconds() / 60) * 360;
+        const minuteDeg = (data.getMinutes() / 60) * 360 + data.getSeconds() * 6 / 60;
+        const hourDeg = (data.getHours() / 12) * 360 + data.getMinutes() * 30 / 60;
+
+        second.style.transform = `rotate(${secondDeg}deg)`;
+        minute.style.transform = `rotate(${minuteDeg}deg)`;
+        hour.style.transform = `rotate(${hourDeg}deg)`;
+      }
+      setLock();
+
+      function animationHandler() {
+        setLock();
+        setTimeout(animationHandler, 1000);
+      }
+
+      function animationHandler() {
+        setLock();
+        window.requestAnimationFrame(animationHandler);
+      }
+
+      // setInterval(setLock, 1000); // 設定間格 持續執行
+      // setTimeout(animationHandler, 1000); // 設定延遲 執行一次
+      window.requestAnimationFrame(animationHandler); // 處理畫面更新更新的 setTimeout
+    })();
+
+  </script> -->
+</body>
+
+</html>
