@@ -26,8 +26,9 @@
       .catch(error => console.error(error));
 
     // 主程式運作
-    const searchInput = document.querySelector('.search');
-    const suggestions = document.querySelector('.suggestions');
+    const getElement = (className) => document.querySelector(className);
+    const searchInput = getElement('.search');
+    const suggestions = getElement('.suggestions');
 
     // searchInput.addEventListener('change', displayMatches);
     searchInput.addEventListener('keyup', displayMatches);
