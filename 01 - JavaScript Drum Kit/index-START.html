@@ -62,12 +62,10 @@
   <script>
     ; (function () {
       const keys = Array.from(document.querySelectorAll('.key'));
+
       window.addEventListener('keydown', playSoundAndAddStyle);
       keys.forEach(key => key.addEventListener('click', playSoundAndAddStyle));
-      keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-
       function playSoundAndAddStyle(e) {
-        console.log(e);
         // let keyValue = e.keyCode || this.getAttribute('data-key');
         let keyValue = e.keyCode || e.currentTarget.dataset.key;
         const key = document.querySelector(`div[data-key='${keyValue}']`);
@@ -78,6 +76,8 @@
           audio.currentTime = 0;
         }
       }
+
+      keys.forEach(key => key.addEventListener('transitionend', removeTransition));
       function removeTransition(e) {
         if (!e.propertyName === 'transform') return;
         e.currentTarget.classList.remove('playing');

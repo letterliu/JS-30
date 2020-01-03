@@ -111,6 +111,17 @@
   <script>
     ; (function () {
 
+      setDate();
+
+      function animationHandler() {
+        setDate();
+        window.requestAnimationFrame(animationHandler);
+      }
+
+      window.requestAnimationFrame(animationHandler);
+
+      // setInterval(setDate, 1000);
+
       function setDate() {
         const time = new Date, currentTime = {}, currentAngle = {};
 
@@ -130,16 +141,6 @@
         hourHand.style.transform = `rotate(${currentAngle.hoursDegrees}deg)`;
       }
 
-      setDate();
-
-      function animationHandler() {
-        setDate();
-        window.requestAnimationFrame(animationHandler);
-      }
-
-      window.requestAnimationFrame(animationHandler);
-
-      // setInterval(setDate, 1000);
     })();
 
   </script>

@@ -29,9 +29,8 @@
     const searchInput = document.querySelector('.search');
     const suggestions = document.querySelector('.suggestions');
 
-    searchInput.addEventListener('keyup', displayMatches);
     // searchInput.addEventListener('change', displayMatches);
-
+    searchInput.addEventListener('keyup', displayMatches);
     function displayMatches(e) {
       const wordToMatch = new RegExp(e.target.value, 'gi');
       const isMatchedArray = findMatches(cities, wordToMatch);

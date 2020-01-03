@@ -8,13 +8,18 @@
     body {
       margin: 0;
     }
+
+    /* 
+    canvas {
+      background: #000;
+    } */
   </style>
 
 </head>
 
 <body>
 
-  <canvas id="draw" width="800" height="800"></canvas>
+  <canvas id="draw" width="100vw" height="100vh"></canvas>
   <script>
     ; (function () {
       const canvas = document.querySelector('#draw');
@@ -25,25 +30,30 @@
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
       ctx.lineWidth = 50;
-      // ctx.globalCompositeOperation = 'multiply';
+      ctx.globalCompositeOperation = 'lighten';
 
       let isDrawing = false;
-      let lastX = 0;
-      let lastY = 0;
-      let hue = 0;
+      let lastX = 0, lastY = 0, HUE = 0;
       let direction = true;
 
       function draw(e) {
+        // console.dir(e);
         if (!isDrawing) return; // stop the fn from running when they are not moused down
-        ctx.strokeStyle = `hsl(${hue}, 80%, 40%)`;
+        ctx.strokeStyle = `hsl(${HUE}, 80%, 40%)`;
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
-        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.lineTo(e.clientX, e.clientY);
+        console.log('e.offsetX, e.offsetY');
+        console.log(e.offsetX, e.offsetY);
+        console.log('e.clientX, e.clientY');
+        console.log(e.clientX, e.clientY);
+        console.log('e.screenX, e.screenY');
+        console.log(e.screenX, e.screenY);
         ctx.stroke();
-        [lastX, lastY] = [e.offsetX, e.offsetY];
+        [lastX, lastY] = [e.clientX, e.clientY];
 
-        hue++;
-        if (hue >= 360) hue = 0;
+        HUE++;
+        if (HUE >= 360) HUE = 0;
         if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) direction = !direction;
 
         if (direction) ctx.lineWidth++;
@@ -52,7 +62,7 @@
 
       canvas.addEventListener('mousedown', (e) => {
         isDrawing = true;
-        [lastX, lastY] = [e.offsetX, e.offsetY];
+        [lastX, lastY] = [e.clientX, e.clientY];
       });
 
       canvas.addEventListener('mousemove', draw);

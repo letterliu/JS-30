@@ -153,13 +153,12 @@
     const panels = Array.from(document.querySelectorAll('.panel'));
 
     panels.forEach(panel => panel.addEventListener('click', toggleOpen));
-    panels.forEach(panel => panel.addEventListener('transitionstart', toggleActive));
-
     function toggleOpen() {
       panels.filter(panel => panel !== this).forEach(panel => panel.classList.remove("open"));
       this.classList.toggle('open');
     }
 
+    panels.forEach(panel => panel.addEventListener('transitionstart', toggleActive));
     function toggleActive(e) {
       if (e.propertyName.includes('flex')) {
         e.currentTarget.classList.toggle('open-active');
