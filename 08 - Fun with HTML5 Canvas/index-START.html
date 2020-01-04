@@ -33,11 +33,14 @@
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
       ctx.lineWidth = 50;
-      ctx.globalCompositeOperation = 'lighten';
+      // ctx.globalCompositeOperation = 'lighten';
 
       let isDrawing = false;
       let lastX = 0;
       let lastY = 0;
+      let alpha = .3;
+      const MAXIMUM_VALUES_FOR_ALPHA = 1;
+      let alphaDirection = true;
       let hue = 0;
       const MAXIMUM_VALUES_FOR_HUE = 360;
       let direction = true;
@@ -50,21 +53,28 @@
       canvas.addEventListener('mousemove', draw);
       function draw(e) {
         if (!isDrawing) return; // stop the fn from running when they are not moused down
-        ctx.strokeStyle = `hsl(${hue}, 80%, 40%)`;
+        ctx.strokeStyle = `hsl(${hue}, 80%, 40%, ${alpha})`;
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
         ctx.lineTo(e.clientX, e.clientY);
         ctx.stroke();
         [lastX, lastY] = [e.clientX, e.clientY];
-        (hue < MAXIMUM_VALUES_FOR_HUE) ? hue++ : (hue = 0);
+        hue < MAXIMUM_VALUES_FOR_HUE ? hue++ : hue = 0;
+        // console.log(hue);
+
+        // (alpha < MAXIMUM_VALUES_FOR_ALPHA) ? alpha += 0.05 : alpha = .5;
+        if (alpha >= MAXIMUM_VALUES_FOR_ALPHA || alpha <= .3) alphaDirection = !alphaDirection;
+        if (alphaDirection) alpha -= 0.05;
+        else alpha += 0.05;
+        // console.log(alpha);
 
         if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) direction = !direction;
         if (direction) ctx.lineWidth++;
         else ctx.lineWidth--;
+        // console.log(ctx.lineWidth);
       }
 
       canvas.addEventListener('mouseup', () => isDrawing = false);
-
       canvas.addEventListener('mouseleave', () => {
         isDrawing = false;
       }, false);
