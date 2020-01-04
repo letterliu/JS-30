@@ -39,10 +39,10 @@
       let lastX = 0;
       let lastY = 0;
       let hue = 0;
-      const MAX_COLOR_WHEEL = 360;
+      const MAXIMUM_VALUES_FOR_HUE = 360;
       let direction = true;
 
-      canvas.addEventListener('mousedown', (e) => {
+      canvas && canvas.addEventListener('mousedown', (e) => {
         isDrawing = true;
         [lastX, lastY] = [e.clientX, e.clientY];
       });
@@ -56,9 +56,7 @@
         ctx.lineTo(e.clientX, e.clientY);
         ctx.stroke();
         [lastX, lastY] = [e.clientX, e.clientY];
-
-        hue++;
-        if (hue >= MAX_COLOR_WHEEL) hue = 0;
+        (hue < MAXIMUM_VALUES_FOR_HUE) ? hue++ : (hue = 0);
 
         if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) direction = !direction;
         if (direction) ctx.lineWidth++;
