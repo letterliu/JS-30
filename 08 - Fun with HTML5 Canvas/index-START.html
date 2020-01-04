@@ -28,12 +28,12 @@
       canvas.setAttribute('width', window.innerWidth);
       canvas.setAttribute('height', window.innerHeight);
 
-      const ctx = canvas.getContext('2d');
-      ctx.strokeStyle = '#000';
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
-      ctx.lineWidth = 50;
-      // ctx.globalCompositeOperation = 'lighten';
+      const renderingContext = canvas.getContext('2d');
+      renderingContext.strokeStyle = '#000';
+      renderingContext.lineJoin = 'round';
+      renderingContext.lineCap = 'round';
+      renderingContext.lineWidth = 50;
+      renderingContext.globalCompositeOperation = 'darken';
 
       let isDrawing = false;
       let lastX = 0;
@@ -53,11 +53,11 @@
       canvas.addEventListener('mousemove', draw);
       function draw(e) {
         if (!isDrawing) return; // stop the fn from running when they are not moused down
-        ctx.strokeStyle = `hsl(${hue}, 80%, 40%, ${alpha})`;
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.lineTo(e.clientX, e.clientY);
-        ctx.stroke();
+        renderingContext.strokeStyle = `hsl(${hue}, 50%, 50%, ${alpha})`;
+        renderingContext.beginPath();
+        renderingContext.moveTo(lastX, lastY);
+        renderingContext.lineTo(e.clientX, e.clientY);
+        renderingContext.stroke();
         [lastX, lastY] = [e.clientX, e.clientY];
         hue < MAXIMUM_VALUES_FOR_HUE ? hue++ : hue = 0;
         // console.log(hue);
@@ -68,10 +68,10 @@
         else alpha += 0.05;
         // console.log(alpha);
 
-        if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) direction = !direction;
-        if (direction) ctx.lineWidth++;
-        else ctx.lineWidth--;
-        // console.log(ctx.lineWidth);
+        if (renderingContext.lineWidth >= 100 || renderingContext.lineWidth <= 1) direction = !direction;
+        if (direction) renderingContext.lineWidth++;
+        else renderingContext.lineWidth--;
+        // console.log(renderingContext.lineWidth);
       }
 
       canvas.addEventListener('mouseup', () => isDrawing = false);
