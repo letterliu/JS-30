@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Console Tricks!</title>
 </head>
+
 <body>
 
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
@@ -18,10 +20,19 @@
     }
 
     // Regular
+    console.log('Hello');
 
     // Interpolated
+    console.log('Hello I am a %s.', 'person');
+    console.log('What is the meaning of number %d?', 7);
+    console.log('%f is a floating point number?', 3.14);
+
+    const expression = 'tagged template';
+    console.log(`Template literals can contain placeholders. These are indicated by the dollar sign and curly braces { ${expression} }.`);
 
     // Styled
+    console.log('%c Dev Tools Domination ', 'font: italic bold 80px/2 Georgia, Serif; color: #e0eff2; background: #3a50d9; text-shadow: -4px 3px 0 #3a50d9, -14px 7px 0 #0a0e27;')
+    // console.log('%c Dev Tools Domination ', 'font: bold 60px/2 monospace; color: black; background: #91877b; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);')
 
     // warning!
 
@@ -43,4 +54,5 @@
 
   </script>
 </body>
+
 </html>
