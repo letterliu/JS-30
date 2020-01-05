@@ -19,6 +19,66 @@
       p.style.fontSize = '50px';
     }
 
+    const console = {
+      isDev: true,
+      log(...args) {
+        if (!this.isDev) return;
+        window.console.log(...args);
+      },
+      warn(...args) {
+        if (!this.isDev) return;
+        window.console.warn(...args);
+      },
+      error(...args) {
+        if (!this.isDev) return;
+        window.console.error(...args);
+      },
+      info(...args) {
+        if (!this.isDev) return;
+        window.console.info(...args);
+      },
+      debug(...args) {
+        if (!this.isDev) return;
+        window.console.debug(...args);
+      },
+      assert(...args) {
+        if (!this.isDev) return;
+        window.console.assert(...args);
+      },
+      dir(...args) {
+        if (!this.isDev) return;
+        window.console.dir(...args);
+      },
+      dirxml(...args) {
+        if (!this.isDev) return;
+        window.console.dirxml(...args);
+      },
+      groupCollapsed(...args) {
+        if (!this.isDev) return;
+        window.console.groupCollapsed(...args);
+      },
+      groupEnd(...args) {
+        if (!this.isDev) return;
+        window.console.groupEnd(...args);
+      },
+      count(...args) {
+        if (!this.isDev) return;
+        window.console.count(...args);
+      },
+      time(...args) {
+        if (!this.isDev) return;
+        window.console.time(...args);
+      },
+      timeEnd(...args) {
+        if (!this.isDev) return;
+        window.console.timeEnd(...args);
+      },
+      table(...args) {
+        if (!this.isDev) return;
+        window.console.table(...args);
+      }
+    }
+
     // Regular
     console.log('Hello');
 
