@@ -56,15 +56,15 @@
 
   <div class="inbox">
     <div class="item">
-      <input class="item1" type="checkbox">
+      <input type="checkbox">
       <p>This is an inbox layout.</p>
     </div>
     <div class="item">
-      <input class="item2" type="checkbox">
+      <input type="checkbox">
       <p>Check one item</p>
     </div>
     <div class="item">
-      <input class="item3" type="checkbox">
+      <input type="checkbox">
       <p>Hold down your Shift key</p>
     </div>
     <div class="item">
@@ -115,24 +115,25 @@
       }
     })();
 
-    const checkboxes = Array.from(document.querySelectorAll('.inbox input[type="checkbox"]'));
-    let lastChecked = null;
+    // ------------------------------------------------------------------------------------------
 
-    checkboxes && checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
-    function handleCheck(e) {
-      let inBetween = false;
-      if (e.shiftKey && this.checked) {
-        checkboxes.forEach(checkbox => {
-          if (checkbox === this || checkbox === lastChecked) {
-            inBetween = !inBetween;
-          }
-          if (inBetween) checkbox.checked = true;
-        });
-      }
+    // const checkboxes = Array.from(document.querySelectorAll('.inbox input[type="checkbox"]'));
+    // let lastChecked = null;
 
-      lastChecked = this;
-    }
+    // checkboxes && checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+    // function handleCheck(e) {
+    //   let inBetween = false;
+    //   if (e.shiftKey && this.checked) {
+    //     checkboxes.forEach(checkbox => {
+    //       if (checkbox === this || checkbox === lastChecked) {
+    //         inBetween = !inBetween;
+    //       }
+    //       if (inBetween) checkbox.checked = true;
+    //     });
+    //   }
 
+    //   lastChecked = this;
+    // }
 
   </script>
 
