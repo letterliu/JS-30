@@ -99,14 +99,14 @@
       const checkboxes = Array.from(document.querySelectorAll('.inbox input[type="checkbox"]'));
       let lastCheckedIndex = null;
 
-      checkboxes.forEach(input => input.addEventListener("click", clickHandler));
+      checkboxes && checkboxes.forEach(input => input.addEventListener("click", clickHandler));
       function clickHandler(e) {
         if (e.target.checked) {
           if (e.shiftKey && (lastCheckedIndex !== null)) {
             let nowCheckIndex = checkboxes.indexOf(e.target);
             checkboxes
               .slice(Math.min(nowCheckIndex, lastCheckedIndex), Math.max(nowCheckIndex, lastCheckedIndex))
-              .forEach(input => (input.checked = true));
+              .forEach(input => input.checked = true);
           }
           lastCheckedIndex = checkboxes.indexOf(e.target);
         } else {
