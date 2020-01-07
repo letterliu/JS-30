@@ -95,49 +95,47 @@
 
   <script>
 
+    ; (function () {
+      const checkboxes = Array.from(document.querySelectorAll('.inbox input[type="checkbox"]'));
+      let lastCheckedIndex = null;
+
+      checkboxes.forEach(input => input.addEventListener("click", clickHandler));
+      function clickHandler(e) {
+        if (e.target.checked) {
+          if (e.shiftKey && (lastCheckedIndex !== null)) {
+            let nowCheckIndex = checkboxes.indexOf(e.target);
+            checkboxes
+              .slice(Math.min(nowCheckIndex, lastCheckedIndex), Math.max(nowCheckIndex, lastCheckedIndex))
+              .forEach(input => (input.checked = true));
+          }
+          lastCheckedIndex = checkboxes.indexOf(e.target);
+        } else {
+          lastCheckedIndex = null;
+        }
+      }
+    })();
+
     const checkboxes = Array.from(document.querySelectorAll('.inbox input[type="checkbox"]'));
-    // console.log(checkboxes[0]);
-    // let lastChecked = null;
+    let lastChecked = null;
 
     checkboxes && checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
     function handleCheck(e) {
-      // Check if they had the shift key down
-      // AND check that they are checking it
       let inBetween = false;
       if (e.shiftKey && this.checked) {
-        // go ahead and do what we please
-        // loop over every single checkbox
-        checkboxes.forEach((checkbox, index) => {
-          console.log('start');
-          console.log(checkbox, index);
+        checkboxes.forEach(checkbox => {
           if (checkbox === this || checkbox === lastChecked) {
             inBetween = !inBetween;
-            console.log('checkbox');
-            console.dir(this);
-            console.dir(lastChecked);
-            console.log(inBetween);
-            console.log('Starting to check them in between!');
           }
-
-          if (inBetween) {
-            console.log('yes');
-            // console.log('this, index');
-            // console.log(this, index);
-            // console.log('lastChecked, index');
-            // console.log(lastChecked, index);
-            checkbox.checked = true;
-          }
+          if (inBetween) checkbox.checked = true;
         });
       }
 
       lastChecked = this;
-      console.log('lastChecked');
-      console.dir(lastChecked);
-      console.log('end');
     }
 
 
   </script>
+
 </body>
 
 </html>
