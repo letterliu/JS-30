@@ -103,16 +103,16 @@
       function clickHandler(e) {
         if (e.target.checked) {
           if (e.shiftKey && (lastCheckedIndex !== null)) {
-            let nowCheckIndex = checkboxes.indexOf(e.target);
+            let nowCheckIndex = checkboxes.findIndex(input => input === e.target);
             checkboxes
               .slice(Math.min(nowCheckIndex, lastCheckedIndex), Math.max(nowCheckIndex, lastCheckedIndex))
               .forEach(input => input.checked = true);
-          }
-          lastCheckedIndex = checkboxes.indexOf(e.target);
+          };
+          lastCheckedIndex = checkboxes.findIndex(input => input === e.target);
         } else {
           lastCheckedIndex = null;
-        }
-      }
+        };
+      };
     })();
 
     // ------------------------------------------------------------------------------------------
