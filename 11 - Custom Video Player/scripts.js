@@ -9,8 +9,8 @@ const ranges = player.querySelectorAll('.player__slider');
 
 video.addEventListener('click', togglePlay);
 toggle.addEventListener('click', togglePlay);
-function togglePlay() {
-  // console.dir(this.constructor.name);
+function togglePlay(e) {
+  console.dir(this.constructor.name);
   const method = video.paused ? 'play' : 'pause';
   video[method]();
 }
@@ -18,8 +18,8 @@ function togglePlay() {
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 function updateButton() {
-  const icon = this.paused ? '<i class="fas fa-play-circle"></i>' : '<i class="fas fa-pause-circle"></i>';
-  toggle.innerHTML = icon;
+  const playorPauseIcon = this.paused ? '<i class="fas fa-play-circle"></i>' : '<i class="fas fa-pause-circle"></i>';
+  toggle.innerHTML = playorPauseIcon;
 }
 
 // skipButtons.forEach(button => button.addEventListener('click', skip));
