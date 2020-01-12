@@ -9,8 +9,9 @@ const ranges = player.querySelectorAll('.player__slider');
 
 video.addEventListener('click', togglePlay);
 toggle.addEventListener('click', togglePlay);
-function togglePlay(e) {
-  console.dir(this.constructor.name);
+function togglePlay() {
+  // console.dir(this.constructor.name);
+  console.dir(this);
   const method = video.paused ? 'play' : 'pause';
   video[method]();
 }
