@@ -22,10 +22,10 @@ function updateButton() {
   toggle.innerHTML = playorPauseIcon;
 }
 
-// skipButtons.forEach(button => button.addEventListener('click', skip));
-// function skip() {
-//   video.currentTime += parseFloat(this.dataset.skip);
-// }
+skipButtons.forEach(button => button.addEventListener('click', skip));
+function skip() {
+  video.currentTime += parseFloat(this.dataset.skip);
+}
 
 // ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
 // ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
