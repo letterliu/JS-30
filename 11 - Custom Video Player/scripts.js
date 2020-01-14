@@ -11,7 +11,6 @@ video.addEventListener('click', togglePlay);
 toggle.addEventListener('click', togglePlay);
 function togglePlay() {
   // console.dir(this.constructor.name);
-  console.dir(this);
   const method = video.paused ? 'play' : 'pause';
   video[method]();
 }
@@ -42,7 +41,6 @@ function handleProgress() {
 
 progress.addEventListener('click', scrub);
 function scrub(e) {
-  console.log(mousedown);
   const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
   video.currentTime = scrubTime;
 }
