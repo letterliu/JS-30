@@ -42,8 +42,6 @@ function handleProgress() {
 
 progress.addEventListener('click', scrub);
 function scrub(e) {
-  console.dir(e);
-  console.dir(this);
   const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
   video.currentTime = scrubTime;
 }
