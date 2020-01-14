@@ -34,17 +34,17 @@ function handleRangeUpdate() {
   video[this.name] = this.value;
 }
 
-// video.addEventListener('timeupdate', handleProgress);
-// function handleProgress() {
-//   const percent = (video.currentTime / video.duration) * 100;
-//   progressBar.style.flexBasis = `${percent}%`;
-// }
+video.addEventListener('timeupdate', handleProgress);
+function handleProgress() {
+  const percent = (video.currentTime / video.duration) * 100;
+  progressBar.style.flexBasis = `${percent}%`;
+}
 
-// progress.addEventListener('click', scrub);
-// function scrub(e) {
-//   const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
-//   video.currentTime = scrubTime;
-// }
+progress.addEventListener('click', scrub);
+function scrub(e) {
+  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = scrubTime;
+}
 
 // let mousedown = false;
 // progress.addEventListener('mousedown', () => mousedown = true);
