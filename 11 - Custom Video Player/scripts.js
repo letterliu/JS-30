@@ -27,13 +27,20 @@ function skip() {
   video.currentTime += parseFloat(this.dataset.skip);
 }
 
+const fullScreenButton = player.querySelector('.fullscreen');
+fullScreenButton.addEventListener('click', fullScreen)
+function fullScreen() {
+  video.requestFullscreen();
+}
+
+
 ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
 ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
 function handleRangeUpdate() {
   video[this.name] = this.value;
 }
 
-video.addEventListener('progress', handleProgress);
+video.addEventListener('timeupdate', handleProgress);
 function handleProgress() {
   const percent = (video.currentTime / video.duration) * 100;
   progressBar.style.flexBasis = `${percent}%`;
