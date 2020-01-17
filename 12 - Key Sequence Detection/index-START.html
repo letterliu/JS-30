@@ -14,10 +14,17 @@
     window.addEventListener('keyup', keyCode);
     function keyCode(e) {
       array.push(e.key);
-      if (array.join('') === secretCode) {
-        console.log(123);
-      }
+      // if (array.length > secretCode.length) {
+      //   array.shift();
+      // }
+      if (array.join('').includes(secretCode)) {
+        cornify_add();
+        array.splice(0);
+        // let b = /^cornify=[\d]+;/g;
+        // let a = document.cookie.replace(b, 'cornify=0')
+        // console.dir(a);
 
+      }
     }
   </script>
 
