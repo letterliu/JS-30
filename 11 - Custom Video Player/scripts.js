@@ -33,7 +33,7 @@ function handleRangeUpdate() {
   video[this.name] = this.value;
 }
 
-video.addEventListener('timeupdate', handleProgress);
+video.addEventListener('progress', handleProgress);
 function handleProgress() {
   const percent = (video.currentTime / video.duration) * 100;
   progressBar.style.flexBasis = `${percent}%`;
