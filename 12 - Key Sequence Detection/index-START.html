@@ -9,22 +9,15 @@
 
 <body>
   <script>
-    const array = [];
-    const secretCode = 'letter';
-    window.addEventListener('keyup', keyCode);
-    function keyCode(e) {
-      array.push(e.key);
-      // if (array.length > secretCode.length) {
-      //   array.shift();
-      // }
-      if (array.join('').includes(secretCode)) {
-        cornify_add();
-        array.splice(0);
-        // let b = /^cornify=[\d]+;/g;
-        // let a = document.cookie.replace(b, 'cornify=0')
-        // console.dir(a);
+    const keyPress = [];
+    const secretCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowLeft', 'ArrowRight', 'ArrowRight', 'b', 'a'];
 
-      }
+    window.addEventListener('keyup', keyboardInput);
+    function keyboardInput(e) {
+      keyPress.push(e.key);
+      secretCode.every((key, index) => key === keyPress[index]) ? cornify_add() : false;
+      // if (keyPress.length > secretCode.length) keyPress.shift();
+      // if (keyPress.join('').includes(secretCode.join(''))) cornify_add();
     }
   </script>
 
