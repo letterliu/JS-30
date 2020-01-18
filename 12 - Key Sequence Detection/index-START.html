@@ -8,19 +8,25 @@
 </head>
 
 <body>
+  <h1>Konami Code：<span class="inputKeyCode"></span></h1>
   <script>
-    const keyPress = [];
-    const SECRET_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowLeft', 'ArrowRight', 'ArrowRight', 'b', 'a'];
+    ; (function () {
+      const keyPress = [];
+      const SECRET_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowLeft', 'ArrowRight', 'ArrowRight', 'b', 'a'];
+      const cheatCodes = document.querySelector('.inputKeyCode');
 
-    window.addEventListener('keyup', KeyDetection);
-    function KeyDetection(e) {
-      keyPress.push(e.key);
-      keyPress.splice(~(keyPress.length), keyPress.length - SECRET_CODE.length);
-      SECRETCODE.every((key, index) => key === keyPress[index]) ? cornify_add() : false;
-      // if (keyPress.length > secretCode.length) keyPress.shift();
-      // if (keyPress.join('').includes(secretCode.join(''))) cornify_add();
-    }
+      window.addEventListener('keyup', KeyDetection);
+      function KeyDetection(e) {
+        keyPress.push(e.key);
+        keyPress.splice(~keyPress.length, keyPress.length - SECRET_CODE.length);
+        cheatCodes.innerHTML = keyPress.join('-');
+        SECRET_CODE.every((key, index) => key === keyPress[index]) && cornify_add();
+        // if (keyPress.length > secretCode.length) keyPress.shift();
+        // if (keyPress.join('').includes(secretCode.join(''))) cornify_add();
+      }
+    })();
   </script>
+
 
 </body>
 
