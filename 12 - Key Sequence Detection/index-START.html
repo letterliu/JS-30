@@ -10,13 +10,13 @@
 <body>
   <script>
     const keyPress = [];
-    const secretCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowLeft', 'ArrowRight', 'ArrowRight', 'b', 'a'];
+    const SECRET_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowLeft', 'ArrowRight', 'ArrowRight', 'b', 'a'];
 
     window.addEventListener('keyup', KeyDetection);
     function KeyDetection(e) {
       keyPress.push(e.key);
-      keyPress.splice(~(keyPress.length), keyPress.length - secretCode.length);
-      secretCode.every((key, index) => key === keyPress[index]) ? cornify_add() : false;
+      keyPress.splice(~(keyPress.length), keyPress.length - SECRET_CODE.length);
+      SECRETCODE.every((key, index) => key === keyPress[index]) ? cornify_add() : false;
       // if (keyPress.length > secretCode.length) keyPress.shift();
       // if (keyPress.join('').includes(secretCode.join(''))) cornify_add();
     }
