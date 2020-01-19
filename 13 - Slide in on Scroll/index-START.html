@@ -33,6 +33,7 @@
       background: white;
       padding: 40px;
       text-align: justify;
+      text-justify: inter-word;
     }
 
     .align-left {
@@ -187,21 +188,33 @@
   </div>
 
   <script>
-    function debounce(func, wait = 20, immediate = true) {
-      var timeout;
-      return function () {
-        var context = this, args = arguments;
-        var later = function () {
-          timeout = null;
-          if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-      };
-    }
+    // function debounce(func, wait = 20, immediate = true) {
+    //   var timeout;
+    //   return function () {
+    //     var context = this, args = arguments;
+    //     var later = function () {
+    //       timeout = null;
+    //       if (!immediate) func.apply(context, args);
+    //     };
+    //     var callNow = immediate && !timeout;
+    //     clearTimeout(timeout);
+    //     timeout = setTimeout(later, wait);
+    //     if (callNow) func.apply(context, args);
+    //   };
+    // }
 
+
+    const sliderImages = document.querySelectorAll('.slide-in');
+    window.addEventListener('scroll', checkSlide);
+    function checkSlide() {
+      viewportTop = window.pageYOffset;
+      viewportBottom = window.pageYOffset + window.innerHeight;
+
+      sliderImages.forEach(sliderImage => {
+        let isHalfShown = sliderImage.offsetTop + sliderImage.offsetHeight / 2;
+        (isHalfShown < viewportBottom && isHalfShown > viewportTop) ? sliderImage.classList.add('active') : sliderImage.classList.remove('active');
+      })
+    }
   </script>
 
 </body>
