@@ -206,7 +206,7 @@
 
       const sliderImages = document.querySelectorAll('.slide-in');
 
-      window.addEventListener('scroll', debounce(checkSlide));
+      window.addEventListener('scroll', debounce(checkSlide, 10));
       function checkSlide() {
         viewportTop = window.pageYOffset;
         viewportBottom = window.pageYOffset + window.innerHeight;
