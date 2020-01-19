@@ -88,7 +88,7 @@
       qui libero ipsum delectus quidem dolor at nulla, adipisci veniam in reiciendis aut asperiores omnis blanditiis
       quod quas laborum nam! Fuga ad tempora in aspernatur pariatur fugit quibusdam dolores sunt esse magni, ut,
       dignissimos.</p>
-    <img src="http://unsplash.it/400/400" class="align-left slide-in">
+    <img data-imglink="http://unsplash.it/400/400" class="align-left slide-in">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, deserunt facilis et iste corrupti omnis
       tenetur est. Iste ut est dicta dolor itaque adipisci, dolorum minima, veritatis earum provident error molestias.
       Ratione magni illo sint vel velit ut excepturi consectetur suscipit, earum modi accusamus voluptatem nostrum,
@@ -97,7 +97,7 @@
       quibusdam fugit perferendis et optio recusandae sed ratione. Culpa, dolorum reprehenderit harum ab voluptas fuga,
       nisi eligendi natus maiores illum quas quos et aperiam aut doloremque optio maxime fugiat doloribus. Eum dolorum
       expedita quam, nesciunt</p>
-    <img src="http://unsplash.it/400/401" class="align-right slide-in">
+    <img data-imglink="http://unsplash.it/400/401" class="align-right slide-in">
     <p> at provident praesentium atque quas rerum optio dignissimos repudiandae ullam illum quibusdam. Vel ad error
       quibusdam, illo ex totam placeat. Quos excepturi fuga, molestiae ea quisquam minus, ratione dicta consectetur
       officia omnis, doloribus voluptatibus? Veniam ipsum veritatis architecto, provident quas consequatur doloremque
@@ -118,10 +118,10 @@
       similique, voluptatem cum, maiores ipsa tempore. Reiciendis sed culpa atque inventore, nam ullam enim expedita
       consectetur id velit iusto alias vitae explicabo nemo neque odio reprehenderit soluta sint eaque. Aperiam, qui ut
       tenetur, voluptate doloremque officiis dicta quaerat voluptatem rerum natus magni. Eum amet autem dolor ullam.</p>
-    <img src="http://unsplash.it/200/500" class="align-left slide-in">
+    <img data-imglink="http://unsplash.it/200/500" class="align-left slide-in">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio maiores adipisci quibusdam repudiandae dolor
       vero placeat esse sit! Quibusdam saepe aperiam explicabo placeat optio, consequuntur nihil voluptatibus expedita
-      quia vero perferendis, deserunt et incidunt eveniet <img src="http://unsplash.it/200/200"
+      quia vero perferendis, deserunt et incidunt eveniet <img data-imglink="http://unsplash.it/200/200"
         class="align-right slide-in"> temporibus doloremque possimus facilis. Possimus labore, officia dolore! Eaque
       ratione saepe, alias harum laboriosam deserunt laudantium blanditiis eum explicabo placeat reiciendis labore iste
       sint. Consectetur expedita dignissimos, non quos distinctio, eos rerum facilis eligendi. Asperiores laudantium,
@@ -142,7 +142,7 @@
       quis reprehenderit repudiandae neque, ab ducimus, odit excepturi voluptate saepe ipsam. Voluptatem eum error
       voluptas porro officiis, amet! Molestias, fugit, ut! Tempore non magnam, amet, facere ducimus accusantium eos
       veritatis neque.</p>
-    <img src="http://unsplash.it/400/400" class="align-right slide-in">
+    <img data-imglink="http://unsplash.it/400/400" class="align-right slide-in">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio maiores adipisci quibusdam repudiandae dolor
       vero placeat esse sit! Quibusdam saepe aperiam explicabo placeat optio, consequuntur nihil voluptatibus expedita
       quia vero perferendis, deserunt et incidunt eveniet temporibus doloremque possimus facilis. Possimus labore,
@@ -213,10 +213,15 @@
         viewportBottom = window.pageYOffset + window.innerHeight;
 
         sliderImages.forEach(sliderImage => {
-          let isHalfShown = sliderImage.offsetTop + sliderImage.offsetHeight / 2;
-          (isHalfShown < viewportBottom && isHalfShown > viewportTop) ? sliderImage.classList.add('active') : sliderImage.classList.remove('active');
+          const isHalfShown = sliderImage.offsetTop + sliderImage.offsetHeight / 2;
+          // (isHalfShown < viewportBottom && isHalfShown > viewportTop) ? sliderImage.classList.add('active') : sliderImage.classList.remove('active');
+          // isHalfShown < viewportBottom && sliderImage.setAttribute('src', sliderImage.dataset.imglink);
+          isHalfShown < viewportBottom && (sliderImage.src = sliderImage.dataset.imglink);
+          // isHalfShown < viewportBottom && sliderImage.style.setProperty('src', sliderImage.dataset.imglink);
+          sliderImage.addEventListener('load', e => e.target.classList.add('active'));
         });
-      }
+      };
+
     })();
   </script>
 
