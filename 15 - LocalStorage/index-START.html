@@ -47,6 +47,15 @@
     const itemsList = document.querySelector('.plates');
     const items = [];
 
+    addItems.addEventListener('submit', addItem);
+    function addItem(e) {
+      e.preventDefault();
+      const text = e.currentTarget.querySelector('[name=item]').value;
+      items.push({ text, done: false });
+      console.dir(items);
+      e.currentTarget.reset();
+    }
+
   </script>
 
 
