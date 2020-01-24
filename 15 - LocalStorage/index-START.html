@@ -58,8 +58,15 @@
     }
 
     function populateList(plates = [], platesList) {
-      console.log(plates, platesList);
-    }
+      platesList.innerHTML = plates.map((plate, index) => {
+        return `
+        <li>
+          <input type="checkbox" data-index=${index} id="item${index}" ${plate.done ? 'checked' : ''} />
+          <label for="item${index}">${plate.text}</label>
+        </li>
+        `;
+      }).join('');
+    };
 
 
   </script>
