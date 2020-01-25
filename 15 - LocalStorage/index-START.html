@@ -60,7 +60,7 @@
     const itemsList = document.querySelector('.plates');
     itemsList.addEventListener('click', toggleDone);
     function toggleDone(e) {
-      if (e.target.matches('label')) return;
+      if (e.target.matches('label') || e.target.matches('li')) return;
       const index = e.target.dataset.index;
       e.target.matches('input') && (items[index].done = !items[index].done);
       e.target.matches('span') && items.splice(index, 1);
@@ -76,7 +76,7 @@
         <li>
           <input type="checkbox" data-index=${index} id="item${index}" ${plate.done ? 'checked' : ''} />
           <label for="item${index}">${plate.text}</label>
-          <span data-index=${index}>X</span>
+          <span data-index=${index}>&times;</span>
         </li>
         `;
       }).join('');
