@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>LocalStorage</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -44,7 +45,6 @@
 
   <script>
     const items = JSON.parse(localStorage.getItem('items')) || [];
-    populateList(items, itemsList);
 
     const addItems = document.querySelector('.add-items');
     addItems.addEventListener('submit', addItem);
@@ -61,18 +61,22 @@
     itemsList.addEventListener('click', toggleDone);
     function toggleDone(e) {
       if (e.target.matches('label')) return;
-      const inputIndex = e.target.dataset.index;
-      items[inputIndex].done = !items[inputIndex].done;
+      const index = e.target.dataset.index;
+      e.target.matches('input') && (items[index].done = !items[index].done);
+      e.target.matches('span') && items.splice(index, 1);
+
       localStorage.setItem('items', JSON.stringify(items));
       populateList(items, itemsList);
     }
 
-    function populateList(plates = [], platesList) {
+    populateList(items, itemsList);
+    function populateList(plates, platesList) {
       platesList.innerHTML = plates.map((plate, index) => {
         return `
         <li>
           <input type="checkbox" data-index=${index} id="item${index}" ${plate.done ? 'checked' : ''} />
           <label for="item${index}">${plate.text}</label>
+          <span data-index=${index}>X</span>
         </li>
         `;
       }).join('');
