@@ -44,7 +44,7 @@ h2 {
 	text-align: left;
 	list-style: none;
 	overflow-y: auto;
-	height: 400px;
+	max-height: 400px;
 }
 
 /* .plates::-webkit-scrollbar {
@@ -84,4 +84,13 @@ h2 {
 	padding: 10px;
 	outline: 0;
 	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.plates span {
+	cursor: pointer;
+}
+
+.checkMethod {
+	text-align: left;
+	margin: 10px auto;
 }

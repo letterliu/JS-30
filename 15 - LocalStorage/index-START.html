@@ -41,10 +41,21 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <div class="checkMethod">
+      <input class="checkAll" type="checkbox">
+      <label>Check All</label>
+    </div>
   </div>
 
   <script>
     const items = JSON.parse(localStorage.getItem('items')) || [];
+    // const test = document.querySelector('.test');
+    // test.addEventListener('click', checkAll);
+    // function checkAll(e) {
+    //   items.forEach(item => item.done = true);
+    //   localStorage.setItem('items', JSON.stringify(items));
+    //   populateList(items, itemsList);
+    // }
 
     const addItems = document.querySelector('.add-items');
     addItems.addEventListener('submit', addItem);
