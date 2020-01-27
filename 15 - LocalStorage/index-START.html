@@ -49,14 +49,6 @@
 
   <script>
     const items = JSON.parse(localStorage.getItem('items')) || [];
-    const checkAllButton = document.querySelector('.checkAll');
-    checkAllButton.addEventListener('click', checkAll);
-    function checkAll(e) {
-      console.dir(e);
-      items.forEach(item => item.done = e.target.checked);
-      localStorage.setItem('items', JSON.stringify(items));
-      populateList(items, itemsList);
-    }
 
     const addItems = document.querySelector('.add-items');
     addItems.addEventListener('submit', addItem);
@@ -81,6 +73,14 @@
       populateList(items, itemsList);
     }
 
+    const checkAllButton = document.querySelector('.checkAll');
+    checkAllButton.addEventListener('click', checkAll);
+    function checkAll(e) {
+      items.forEach(item => item.done = e.target.checked);
+      localStorage.setItem('items', JSON.stringify(items));
+      populateList(items, itemsList);
+    }
+
     populateList(items, itemsList);
     function populateList(plates, platesList) {
       platesList.innerHTML = plates.map((plate, index) => {
@@ -95,7 +95,6 @@
     };
 
   </script>
-
 
 </body>
 
