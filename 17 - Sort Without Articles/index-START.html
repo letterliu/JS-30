@@ -59,7 +59,7 @@
         .join('');
 
     function strip(bandName) {
-      const WITHOUT_ARTICLES = /^( a | the | an )/i;
+      const WITHOUT_ARTICLES = /^(a |the |an )/i;
       return bandName.replace(WITHOUT_ARTICLES, '').trim();
     }
 
