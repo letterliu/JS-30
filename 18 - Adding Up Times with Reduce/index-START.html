@@ -4,6 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Videos</title>
+  <style>
+    body {
+      background: url("https://images.unsplash.com/photo-1580847021186-9c26b07d4f25?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3387&q=80") center center / cover;
+      color: #ccc;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    li {
+      padding: 2px 10px 2px 2px;
+    }
+  </style>
 </head>
 
 <body>
@@ -187,20 +199,22 @@
 
   <script>
 
-    const timeNodes = [...document.querySelectorAll('[data-time]')];
+    ; (function () {
+      const timeNodes = [...document.querySelectorAll('[data-time]')];
 
-    const totalSeconds = timeNodes
-      .map(timeCode => {
-        const [mins, secs] = (timeCode.dataset.time).split(':').map(Number);
-        return mins * 60 + secs;
-      })
-      .reduce((total, vidSeconds) => total + vidSeconds, 0);
+      const totalSeconds = timeNodes
+        .map(timeCode => {
+          const [mins, secs] = (timeCode.dataset.time).split(':').map(Number);
+          return mins * 60 + secs;
+        })
+        .reduce((total, videoSeconds) => total + videoSeconds, 0);
 
-    const hours = Math.floor(totalSeconds / 60 / 60);
-    const minutes = Math.floor(totalSeconds / 60 % 60);
-    const seconds = totalSeconds % 60;
+      const hours = Math.floor(totalSeconds / 60 / 60);
+      const minutes = Math.floor(totalSeconds / 60 % 60);
+      const seconds = totalSeconds % 60;
 
-    console.info(`${hours} : ${minutes} : ${seconds}`);
+      console.info('%s', `${hours} : ${minutes} : ${seconds}`);
+    })();
 
   </script>
 </body>
