@@ -40,7 +40,7 @@ function paintToCanvas() {
     pixels = rgbSplit(pixels);
     // ctx.globalAlpha = 0.8;
 
-    pixels = greenScreen(pixels);
+    // pixels = greenScreen(pixels);
     // put them back
     ctx.putImageData(pixels, 0, 0);
   }, 16);
