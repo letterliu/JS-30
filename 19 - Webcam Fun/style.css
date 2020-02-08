@@ -47,6 +47,10 @@ html {
 	padding: 2rem;
 }
 
+.strip a {
+	display: inline-block;
+}
+
 .strip img {
 	width: 100px;
 	overflow-x: scroll;

@@ -49,24 +49,22 @@ function paintToCanvas() {
         break;
     }
 
-    // ctx.clearRect(0, 0, videoWidth, videoHeight);
+    ctx.clearRect(0, 0, videoWidth, videoHeight);
     ctx.putImageData(pixels, 0, 0);
   }, 16);
 }
 
-// function takePhoto() {
-//   // played the sound
-//   snap.currentTime = 0;
-//   snap.play();
+function takePhoto() {
+  snap.currentTime = 0;
+  snap.play();
 
-//   // take the data out of the canvas
-//   const data = canvas.toDataURL('image/jpeg');
-//   const link = document.createElement('a');
-//   link.href = data;
-//   link.setAttribute('download', 'handsome');
-//   link.innerHTML = `<img src="${data}" alt="Handsome Man" />`;
-//   strip.insertBefore(link, strip.firstChild);
-// }
+  const data = canvas.toDataURL('image/jpeg');
+  const link = document.createElement('a');
+  link.href = data;
+  link.setAttribute('download', 'handsome');
+  link.innerHTML = `<img src="${data}" alt="Handsome Man" />`;
+  strip.insertBefore(link, strip.firstChild);
+}
 
 function redEffect(pixels) {
   for (let i = 0; i < pixels.data.length; i += 4) {
@@ -99,7 +97,7 @@ function greenScreen(pixels) {
     blue = pixels.data[i + 2];
     alpha = pixels.data[i + 3];
 
-    (red >= levels.rmin && green >= levels.gmin && blue >= levels.bmin && red <= levels.rmax && green <= levels.gmax && blue <= levels.bmax) && (pixels.data[i + 3] = 0);
+    (red >= levels.rmin && red <= levels.rmax && green >= levels.gmin && green <= levels.gmax && blue >= levels.bmin && blue <= levels.bmax) && (pixels.data[i + 3] = 0);
   }
   return pixels;
 }
