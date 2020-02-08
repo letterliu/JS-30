@@ -8,47 +8,40 @@ getVideo();
 video.addEventListener('canplay', paintToCanvas);
 
 function getVideo() {
-  console.dir(video);
+  // console.dir(video);
   navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(localMediaStream => {
-      console.log(localMediaStream);
-
-      //  DEPRECIATION : 
-      //       The following has been depreceated by major browsers as of Chrome and Firefox.
-      //       video.src = window.URL.createObjectURL(localMediaStream);
-      //       Please refer to these:
-      //       Depreceated  - https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL
-      //       Newer Syntax - https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/srcObject
-
       video.srcObject = localMediaStream;
       video.play();
     })
-    .catch(err => {
-      console.error(`OH NO!!!`, err);
+    .catch(error => {
+      console.error(`OH NO!!!`, error);
     });
 }
 
-// function paintToCanvas() {
-//   const width = video.videoWidth;
-//   const height = video.videoHeight;
-//   canvas.width = width;
-//   canvas.height = height;
+function paintToCanvas() {
+  const { videoWidth, videoHeight } = video;
+  canvas.width = videoWidth;
+  canvas.height = videoHeight;
 
-//   return setInterval(() => {
-//     ctx.drawImage(video, 0, 0, width, height);
-//     // take the pixels out
-//     let pixels = ctx.getImageData(0, 0, width, height);
-//     // mess with them
-//     // pixels = redEffect(pixels);
+  return setInterval(() => {
+    ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
+    // take the pixels out
+    let pixels = ctx.getImageData(0, 0, videoWidth, videoHeight);
+    console.log(`Aera: ${videoWidth * videoHeight}, Pixels: ${pixels.data.length}`);
+    debugger;
 
-//     pixels = rgbSplit(pixels);
-//     // ctx.globalAlpha = 0.8;
+    // mess with them
+    // pixels = redEffect(pixels);
 
-//     // pixels = greenScreen(pixels);
-//     // put them back
-//     ctx.putImageData(pixels, 0, 0);
-//   }, 16);
-// }
+    // pixels = rgbSplit(pixels);
+    // ctx.globalAlpha = 0.8;
+
+    // pixels = greenScreen(pixels);
+    // put them back
+    ctx.putImageData(pixels, 0, 0);
+  }, 16);
+}
 
 // function takePhoto() {
 //   // played the sound
