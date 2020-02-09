@@ -33,7 +33,6 @@ function paintToCanvas() {
     ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
 
     let pixels = ctx.getImageData(0, 0, videoWidth, videoHeight);
-    console.dir(pixels);
     console.log(`Aera: ${videoWidth * videoHeight}, Pixels: ${pixels.data.length}`);
 
     switch (functionCode) {
@@ -58,11 +57,11 @@ function takePhoto() {
   snap.currentTime = 0;
   snap.play();
 
-  const data = canvas.toDataURL('image/jpeg');
+  const data = canvas.toDataURL('image/jpeg', 1);
   const link = document.createElement('a');
   link.href = data;
-  link.setAttribute('download', 'handsome');
-  link.innerHTML = `<img src="${data}" alt="Handsome Man" />`;
+  link.setAttribute('download', 'photo');
+  link.innerHTML = `<img src="${data}" alt="photo"/>`;
   strip.insertBefore(link, strip.firstChild);
 }
 
