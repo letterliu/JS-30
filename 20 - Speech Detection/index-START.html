@@ -54,6 +54,33 @@
   <script>
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = false;
+    recognition.lang = 'zh-TW';
+
+    recognition.start();
+    recognition.addEventListener('start', console.log('語音測試開始'));
+
+    recognition.addEventListener('result', e => {
+      const transcript = Array.from(e.results)
+        .map(result => result[0].transcript)
+        .join('');
+
+      if (e.results[0].isFinal) {
+        const words = document.querySelector('.words');
+        const p = document.createElement('p');
+        // p.textContent = transcript.replace(/大便|吃屎|狗屎/gi, '💩');
+        p.textContent = transcript.replace(/句號|逗號|問號/gi, punctuations);
+        words.appendChild(p);
+
+        function punctuations(matchString) {
+          const tokenMap = { '句號': '\u3002', '逗號': '\uff0c', '問號': '\u003f' };
+          return tokenMap[matchString];
+        };
+      }
+    });
+
+    recognition.addEventListener('end', recognition.start);
 
   </script>
 
