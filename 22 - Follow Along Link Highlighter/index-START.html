@@ -53,28 +53,30 @@
   </div>
 
   <script>
-    const triggers = document.querySelectorAll('a');
-    const highlight = document.createElement('span');
-    highlight.classList.add('highlight');
-    document.body.appendChild(highlight);
+    ; (function () {
 
-    function highlightLink() {
-      const linkCoords = this.getBoundingClientRect();
-      console.log(linkCoords);
-      const coords = {
-        width: linkCoords.width,
-        height: linkCoords.height,
-        top: linkCoords.top + window.scrollY,
-        left: linkCoords.left + window.scrollX
-      };
+      const highlightBox = document.createElement('span');
+      highlightBox.classList.add('highlight');
+      document.body.appendChild(highlightBox);
 
-      highlight.style.width = `${coords.width}px`;
-      highlight.style.height = `${coords.height}px`;
-      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+      const triggers = document.querySelectorAll('.menu a, .wrapper a');
+      triggers.forEach(anchor => anchor.addEventListener('mouseenter', highlightLink));
+      function highlightLink(e) {
+        const linkCoords = e.target.getBoundingClientRect();
 
-    }
+        let { width, height, left, top } = linkCoords;
+        left += e.view.pageXOffset;
+        top += e.view.pageYOffset;
 
-    triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+        highlightBox.style.width = `${width}px`;
+        highlightBox.style.height = `${height}px`;
+        highlightBox.style.transform = `translate(${left}px, ${top}px)`;
+
+      }
+
+
+      // window.addEventListener("resize", highlightLink);
+    })();
 
   </script>
 </body>

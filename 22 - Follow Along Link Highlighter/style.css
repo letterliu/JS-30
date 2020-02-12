@@ -22,17 +22,19 @@ body {
 	max-width: 450px;
 	position: relative;
 	color: aliceblue;
+	margin-top: 100px;
 }
 
 a {
 	text-decoration: none;
-	color: rgb(3, 170, 3);
+	color: rgb(4, 245, 4);
 	background: rgba(0, 0, 0, 0.05);
 	border-radius: 20px;
+	font-weight: bold;
 }
 
 .highlight {
-	background: rgb(230, 195, 2);
+	background: rgb(216, 184, 2);
 	transition: all 0.2s;
 	position: absolute;
 	top: 0;
