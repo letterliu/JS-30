@@ -58,15 +58,23 @@
       const highlightBox = document.createElement('span');
       highlightBox.classList.add('highlight');
       document.body.appendChild(highlightBox);
+      let target = null;
 
       const triggers = document.querySelectorAll('.menu a, .wrapper a');
-      triggers.forEach(anchor => anchor.addEventListener('mouseenter', highlightLink));
-      function highlightLink(e) {
-        const linkCoords = e.target.getBoundingClientRect();
+      triggers && triggers.forEach(anchor => anchor.addEventListener('mouseenter', targetHandler));
+      function targetHandler(e) {
+        ({ target } = e);
+        highlightLink();
+      }
+
+      window.addEventListener("resize", highlightLink);
+      function highlightLink() {
+        if (!target) return;
+        const linkCoords = target.getBoundingClientRect();
 
         let { width, height, left, top } = linkCoords;
-        left += e.view.pageXOffset;
-        top += e.view.pageYOffset;
+        left += window.pageXOffset;
+        top += window.pageYOffset;
 
         highlightBox.style.width = `${width}px`;
         highlightBox.style.height = `${height}px`;
@@ -74,8 +82,6 @@
 
       }
 
-
-      // window.addEventListener("resize", highlightLink);
     })();
 
   </script>
