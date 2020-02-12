@@ -67,15 +67,11 @@
       let target = null;
 
       const triggers = document.querySelectorAll('.menu a, .wrapper a');
-      triggers && triggers.forEach(anchor => anchor.addEventListener('mouseenter', targetHandler));
-      function targetHandler(e) {
-        ({ target } = e);
-        highlightLink();
-      }
+      triggers && triggers.forEach(anchor => anchor.addEventListener('mouseenter', highlightLink));
 
-      window.addEventListener("resize", highlightLink);
-      function highlightLink() {
-        if (!target) return;
+      window.addEventListener("resize", (e) => target && highlightLink(e));
+      function highlightLink(e) {
+        (e.currentTarget !== window) && ({ target } = e);
         const linkCoords = target.getBoundingClientRect();
 
         let { width, height, left, top } = linkCoords;
