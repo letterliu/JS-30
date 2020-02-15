@@ -54,7 +54,6 @@
 
       voicesDropdown.addEventListener('change', setVoice);
       function setVoice(e) {
-        console.dir(e);
         msg.voice = voices.find(voice => voice.name === e.target.value);
         toggle();
       }
