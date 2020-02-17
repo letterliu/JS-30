@@ -169,19 +169,31 @@
   </div>
 
   <script>
-    const nav = document.getElementById('main');
-    const { offsetTop, offsetHeight } = nav;
 
-    window.addEventListener('scroll', fixedNav);
-    function fixedNav() {
-      if (window.pageYOffset >= offsetTop) {
-        document.body.style.paddingTop = `${offsetHeight}px`;
-        document.body.classList.add('fixed-nav');
-      } else {
-        document.body.classList.remove('fixed-nav');
-        document.body.style.paddingTop = '';
+    ; (function () {
+
+      const nav = document.getElementById('main');
+      let { offsetTop, offsetHeight } = nav;
+
+      window.addEventListener('scroll', fixedNav);
+      function fixedNav() {
+        if (window.pageYOffset >= offsetTop) {
+          document.body.style.paddingTop = `${offsetHeight}px`;
+          document.body.classList.add('fixed-nav');
+        } else {
+          document.body.style.paddingTop = '';
+          document.body.classList.remove('fixed-nav');
+        }
       }
-    }
+
+      window.addEventListener('resize', () => (!nav.offsetTop) && resizeNav());
+      function resizeNav() {
+        document.body.classList.remove('fixed-nav');
+        offsetTop = nav.offsetTop - offsetHeight;
+        document.body.classList.add('fixed-nav');
+      }
+
+    })();
 
   </script>
 
