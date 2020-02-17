@@ -60,10 +60,10 @@
       }
 
       speakButton.addEventListener('click', toggle);
-      stopButton.addEventListener('click', toggle.bind(null, false));
+      stopButton.addEventListener('click', toggle.bind(stopButton, false));
       function toggle(startOver = true) {
-        speechSynthesis.cancel();
-        startOver && speechSynthesis.speak(msg);
+        window.speechSynthesis.cancel();
+        startOver && window.speechSynthesis.speak(msg);
       }
 
       options.forEach(option => option.addEventListener('change', setOption));
