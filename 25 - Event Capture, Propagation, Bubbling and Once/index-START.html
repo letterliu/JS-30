@@ -1,9 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Understanding JavaScript's Capture</title>
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    div {
+      width: 100%;
+      padding: 50px;
+    }
+
+    .one {
+      background: thistle;
+    }
+
+    .two {
+      background: mistyrose;
+    }
+
+    .three {
+      background: coral;
+    }
+
+    .anchors>a {
+      padding: 10px 30px;
+      text-decoration: none;
+      background: coral;
+      color: #fff;
+      border-radius: 8%;
+    }
+  </style>
 </head>
+
 <body class="bod">
 
   <div class="one">
@@ -13,36 +51,54 @@
     </div>
   </div>
 
-<style>
-  html {
-    box-sizing: border-box;
-  }
-  
-  *, *:before, *:after { 
-    box-sizing: inherit; 
-  }
+  <div id="buttonGroup">
+    <button class="button1">oneOffClick1</button>
+    <button class="button2">oneOffClick2</button>
+    <button class="button3">oneOffClick3</button>
+    <button class="button4">oneOffClick4</button>
+  </div>
 
-  div {
-    width: 100%;
-    padding: 100px;
-  }
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-  .one {
-    background: thistle;
-  }
+  <div class="anchors">
+    <a href="#" class="button">Button1</a>
+    <a href="#" class="button">Button2</a>
+    <a href="#" class="button">Button3</a>
+    <a href="#" class="button">Button4</a>
+  </div>
 
-  .two {
-    background: mistyrose;
-  }
 
-  .three {
-    background: coral;
-  }
-</style>
+  <script>
 
-<button></button>
-<script>
+    const divs = document.querySelectorAll('div');
+    divs.forEach(div => div.addEventListener('mouseover', logText, { capture: true }));
+    function logText(e) {
+      console.dir(this.classList.value);
+      // console.log(e.eventPhase);
+      // e.stopPropagation();
+    }
 
-</script>
+    const button = document.getElementsByTagName('button');
+    [...button].forEach(button => button.addEventListener('click', oneOffClick, { once: true }));
+    function oneOffClick() {
+      console.log('oneOffClick');
+    }
+
+    const buttons = document.getElementById('buttonGroup');
+    buttons.addEventListener('click', eventDelegate, { capture: false, once: true });
+    function eventDelegate(e) {
+      console.log(e.composedPath());
+      console.dir(e.target);
+    }
+
+    const anchors = document.querySelector('.anchors');
+    anchors.addEventListener('click', anchorHandler, { capture: false, passive: false });
+    function anchorHandler(e) {
+      e.preventDefault();
+      console.dir(e);
+    }
+
+  </script>
 </body>
+
 </html>
