@@ -22,15 +22,22 @@
       font-family: monospace;
     }
 
+    h1 {
+      font-size: 16px;
+      color: #ffc600;
+      padding: 10px 30px;
+    }
+
     nav {
+      margin-top: 40px;
       position: relative;
       perspective: 600px;
     }
 
-    .cool>li>a {
+    .listGroup>li>a {
       color: #ffc600;
       text-decoration: none;
-      font-size: 20px;
+      font-size: 18px;
       border: 1px solid #ffc600;
       padding: 10px 30px;
       display: inline-block;
@@ -40,14 +47,13 @@
 
     nav ul {
       list-style: none;
-      margin-top: 30px;
       margin-right: 8%;
       padding: 0;
       display: flex;
       justify-content: flex-end;
     }
 
-    .cool>li {
+    .listGroup>li {
       position: relative;
       display: flex;
       justify-content: center;
@@ -124,7 +130,11 @@
     .courses li {
       padding: 10px 0;
       display: block;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    }
+
+    .courses li+li {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
     }
 
     .dropdown a {
@@ -156,12 +166,13 @@
 </head>
 
 <body>
-  <nav class="top">
+  <h1>Letter LIU</h1>
+  <nav class="navigator">
     <div class="dropdownBackground">
       <span class="arrow"></span>
     </div>
 
-    <ul class="cool">
+    <ul class="listGroup">
       <li>
         <a href="#">ABOUT ME</a>
         <div class="dropdown dropdown1">
@@ -228,37 +239,34 @@
   </nav>
 
   <script>
-    const triggers = document.querySelectorAll('.cool > li');
+    const triggers = document.querySelectorAll('.listGroup > li');
     const background = document.querySelector('.dropdownBackground');
-    const nav = document.querySelector('.top');
+    const nav = document.querySelector('.navigator');
 
-    // triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
-    // function handleEnter() {
-    //   this.classList.add('trigger-enter');
-    //   setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
-    //   background.classList.add('open');
+    triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
+    function handleEnter() {
+      this.classList.add('trigger-enter');
+      window.setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
+      background.classList.add('open');
 
-    //   const dropdown = this.querySelector('.dropdown');
-    //   const dropdownCoords = dropdown.getBoundingClientRect();
-    //   const navCoords = nav.getBoundingClientRect();
+      const dropdown = this.querySelector('.dropdown');
+      const dropdownCoords = dropdown.getBoundingClientRect();
+      const navCoords = nav.getBoundingClientRect();
 
-    //   const coords = {
-    //     height: dropdownCoords.height,
-    //     width: dropdownCoords.width,
-    //     top: dropdownCoords.top - navCoords.top,
-    //     left: dropdownCoords.left - navCoords.left
-    //   };
+      let { height, width, top, left } = dropdownCoords;
+      top -= navCoords.top;
+      left -= navCoords.left;
 
-    //   background.style.setProperty('width', `${coords.width}px`);
-    //   background.style.setProperty('height', `${coords.height}px`);
-    //   background.style.setProperty('transform', `translate(${coords.left}px, ${coords.top}px)`);
-    // }
+      background.style.setProperty('width', `${width}px`);
+      background.style.setProperty('height', `${height}px`);
+      background.style.setProperty('transform', `translate(${left}px, ${top}px)`);
+    }
 
-    // triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
-    // function handleLeave() {
-    //   this.classList.remove('trigger-enter', 'trigger-enter-active');
-    //   background.classList.remove('open');
-    // }
+    triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
+    function handleLeave() {
+      this.classList.remove('trigger-enter', 'trigger-enter-active');
+      background.classList.remove('open');
+    }
 
   </script>
 
