@@ -150,17 +150,17 @@
       margin-bottom: 10px;
     }
 
-    /* Matches Twitter, TWITTER, twitter, tWitter, TWiTTeR... */
-    .button[href*=twitter] {
-      background: #019FE9;
-    }
-
+    /* Matches facebook, hexo... */
     .button[href*=facebook] {
       background: #3B5998;
     }
 
-    .button[href*=courses] {
-      background: #ffc600;
+    .button.hexo {
+      background: #1094e8;
+    }
+
+    .button.ironman {
+      background: #6b38fb;
     }
   </style>
 </head>
@@ -179,7 +179,7 @@
           <div class="bio">
             <img
               src="https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
-            <p>letter liu sure does love web development. He teaches things like JavaScript, CSS and BBQ. Wait. BBQ
+            <p>letterliu sure does love web development. He teaches things like JavaScript, CSS and BBQ. Wait. BBQ
               isn't
               part of web development. It should be though!</p>
           </div>
@@ -229,10 +229,11 @@
       <li>
         <a href="#">OTHER LINKS</a>
         <ul class="dropdown dropdown3">
-          <li><a class="button" href="http://twitter.com/wesbos">Twitter</a></li>
-          <li><a class="button" href="http://facebook.com/wesbos.developer">Facebook</a></li>
-          <li><a class="button" href="http://wesbos.com">Blog</a></li>
-          <li><a class="button" href="http://wesbos.com/courses">Course Catalog</a></li>
+          <li><a class="button" href="https://github.com/letterliu">gitHub</a></li>
+          <li><a class="button" href="https://www.facebook.com/letter.liu">Facebook</a></li>
+          <li><a class="button hexo" href="https://letterliu.github.io/">HexoBlog</a></li>
+          <li><a class="button ironman" href="https://ithelp.ithome.com.tw/users/20112726/ironman">Tetsujin 28 Gou</a>
+          </li>
         </ul>
       </li>
     </ul>
@@ -246,11 +247,10 @@
     triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
     function handleEnter() {
       this.classList.add('trigger-enter');
-      window.setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
+      window.setTimeout(() => this.classList.add('trigger-enter-active'), 150);
       background.classList.add('open');
 
-      const dropdown = this.querySelector('.dropdown');
-      const dropdownCoords = dropdown.getBoundingClientRect();
+      const dropdownCoords = this.querySelector('.dropdown').getBoundingClientRect();
       const navCoords = nav.getBoundingClientRect();
 
       let { height, width, top, left } = dropdownCoords;
