@@ -25,7 +25,6 @@ body {
 	height: 800px;
 	padding: 100px;
 	width: 100%;
-	/* border: 1px solid white; */
 	overflow-x: scroll;
 	overflow: hidden;
 	white-space: nowrap;
@@ -35,13 +34,11 @@ body {
 	transform: scale(0.98);
 	will-change: transform;
 	position: relative;
-	/* background: rgba(255, 255, 255, 0.1); */
 	font-size: 0;
 	perspective: 500px;
 }
 
 .items.active {
-	background: rgba(255, 255, 255, 0.3);
 	cursor: grabbing;
 	cursor: -webkit-grabbing;
 	transform: scale(1);
