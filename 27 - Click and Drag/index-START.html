@@ -60,13 +60,14 @@
       slider.classList.remove('active');
     });
 
-    slider.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
+    slider.addEventListener('mousemove', (e) => isDown && handleMove(e));
+    function handleMove(e) {
       e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 3;
-      slider.scrollLeft = scrollLeft - walk;
-    });
+      const multiple = 3;
+      const endX = e.pageX - slider.offsetLeft;
+      const routeDistance = (endX - startX) * multiple;
+      slider.scrollLeft = scrollLeft - routeDistance;
+    }
 
   </script>
 

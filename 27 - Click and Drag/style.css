@@ -25,7 +25,7 @@ body {
 	height: 800px;
 	padding: 100px;
 	width: 100%;
-	border: 1px solid white;
+	/* border: 1px solid white; */
 	overflow-x: scroll;
 	overflow: hidden;
 	white-space: nowrap;
