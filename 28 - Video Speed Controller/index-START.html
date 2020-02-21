@@ -19,10 +19,10 @@
 
   <script>
 
-    const speed = document.querySelector('.speed');
-    const speedBar = speed.querySelector('.speed-bar');
     const video = document.querySelector('.film');
+    const speedBar = document.querySelector('.speed-bar');
 
+    const speed = document.querySelector('.speed');
     speed.addEventListener('mousemove', handleMove);
     function handleMove(e) {
       const { pageY, currentTarget: { offsetTop, offsetHeight } } = e;
@@ -32,7 +32,7 @@
       const playbackRate = percent * (maxRate - minRate) + minRate;
 
       speedBar.style.height = `${Math.round(percent * 100)}%`;
-      speedBar.textContent = `${playbackRate.toFixed(2)}x`;
+      speedBar.textContent = `${playbackRate.toFixed(1)}x`;
       video.playbackRate = playbackRate;
     }
 
