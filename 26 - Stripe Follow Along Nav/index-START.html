@@ -240,33 +240,37 @@
   </nav>
 
   <script>
-    const triggers = document.querySelectorAll('.listGroup > li');
-    const background = document.querySelector('.dropdownBackground');
-    const nav = document.querySelector('.navigator');
+    ; (function () {
 
-    triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
-    function handleEnter() {
-      this.classList.add('trigger-enter');
-      window.setTimeout(() => this.classList.add('trigger-enter-active'), 150);
-      background.classList.add('open');
+      const triggers = document.querySelectorAll('.listGroup > li');
+      const background = document.querySelector('.dropdownBackground');
+      const nav = document.querySelector('.navigator');
 
-      const dropdownCoords = this.querySelector('.dropdown').getBoundingClientRect();
-      const navCoords = nav.getBoundingClientRect();
+      triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
+      function handleEnter() {
+        this.classList.add('trigger-enter');
+        window.setTimeout(() => this.classList.add('trigger-enter-active'), 150);
+        background.classList.add('open');
 
-      let { height, width, top, left } = dropdownCoords;
-      top -= navCoords.top;
-      left -= navCoords.left;
+        const dropdownCoords = this.querySelector('.dropdown').getBoundingClientRect();
+        const navCoords = nav.getBoundingClientRect();
 
-      background.style.setProperty('width', `${width}px`);
-      background.style.setProperty('height', `${height}px`);
-      background.style.setProperty('transform', `translate(${left}px, ${top}px)`);
-    }
+        let { height, width, top, left } = dropdownCoords;
+        top -= navCoords.top;
+        left -= navCoords.left;
 
-    triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
-    function handleLeave() {
-      this.classList.remove('trigger-enter', 'trigger-enter-active');
-      background.classList.remove('open');
-    }
+        background.style.setProperty('width', `${width}px`);
+        background.style.setProperty('height', `${height}px`);
+        background.style.setProperty('transform', `translate(${left}px, ${top}px)`);
+      }
+
+      triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
+      function handleLeave() {
+        this.classList.remove('trigger-enter', 'trigger-enter-active');
+        background.classList.remove('open');
+      }
+
+    })();
 
   </script>
 

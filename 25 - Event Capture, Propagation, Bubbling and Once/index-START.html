@@ -70,33 +70,36 @@
 
   <script>
 
-    const divs = document.querySelectorAll('div');
-    divs.forEach(div => div.addEventListener('mouseover', logText, { capture: true }));
-    function logText(e) {
-      console.dir(this.classList.value);
-      // console.log(e.eventPhase);
-      // e.stopPropagation();
-    }
+    ; (function () {
 
-    const button = document.getElementsByTagName('button');
-    [...button].forEach(button => button.addEventListener('click', oneOffClick, { once: true }));
-    function oneOffClick() {
-      console.log('oneOffClick');
-    }
+      const divs = document.querySelectorAll('div');
+      divs.forEach(div => div.addEventListener('mouseover', logText, { capture: true }));
+      function logText(e) {
+        console.dir(this.classList.value);
+        // console.log(e.eventPhase);
+        // e.stopPropagation();
+      }
 
-    const buttons = document.getElementById('buttonGroup');
-    buttons.addEventListener('click', eventDelegate, { capture: false, once: true });
-    function eventDelegate(e) {
-      console.log(e.composedPath());
-      console.dir(e.target);
-    }
+      const button = document.getElementsByTagName('button');
+      [...button].forEach(button => button.addEventListener('click', oneOffClick, { once: true }));
+      function oneOffClick() {
+        console.log('oneOffClick');
+      }
 
-    const anchors = document.querySelector('.anchors');
-    anchors.addEventListener('click', anchorHandler, { capture: false, passive: false });
-    function anchorHandler(e) {
-      e.preventDefault();
-      console.dir(e);
-    }
+      const buttons = document.getElementById('buttonGroup');
+      buttons.addEventListener('click', eventDelegate, { capture: false, once: true });
+      function eventDelegate(e) {
+        console.log(e.composedPath());
+        console.dir(e.target);
+      }
+
+      const anchors = document.querySelector('.anchors');
+      anchors.addEventListener('click', anchorHandler, { capture: false, passive: false });
+      function anchorHandler(e) {
+        e.preventDefault();
+        console.dir(e);
+      }
+    })();
 
   </script>
 </body>

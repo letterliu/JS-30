@@ -19,22 +19,25 @@
 
   <script>
 
-    const video = document.querySelector('.film');
-    const speedBar = document.querySelector('.speed-bar');
+    ; (function () {
 
-    const speed = document.querySelector('.speed');
-    speed.addEventListener('mousemove', handleMove);
-    function handleMove(e) {
-      const { pageY, currentTarget: { offsetTop, offsetHeight } } = e;
-      const percent = (pageY - offsetTop) / offsetHeight;
+      const video = document.querySelector('.film');
+      const speedBar = document.querySelector('.speed-bar');
 
-      const minRate = 0.4, maxRate = 4;
-      const playbackRate = percent * (maxRate - minRate) + minRate;
+      const speed = document.querySelector('.speed');
+      speed.addEventListener('mousemove', handleMove);
+      function handleMove(e) {
+        const { pageY, currentTarget: { offsetTop, offsetHeight } } = e;
+        const percent = (pageY - offsetTop) / offsetHeight;
 
-      speedBar.style.height = `${Math.round(percent * 100)}%`;
-      speedBar.textContent = `${playbackRate.toFixed(1)}x`;
-      video.playbackRate = playbackRate;
-    }
+        const minRate = 0.4, maxRate = 4;
+        const playbackRate = percent * (maxRate - minRate) + minRate;
+
+        speedBar.style.height = `${Math.round(percent * 100)}%`;
+        speedBar.textContent = `${playbackRate.toFixed(1)}x`;
+        video.playbackRate = playbackRate;
+      }
+    })();
 
   </script>
 </body>
