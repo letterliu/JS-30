@@ -17,7 +17,8 @@
       <button data-time="1200" class="timer__button">Snack 20</button>
       <button data-time="3600" class="timer__button">Lunch Break</button>
       <form name="customForm" id="custom">
-        <input type="text" pattern="[1-9][\d]{0,2}?" name="minutes" placeholder="Enter Minutes">
+        <input type="text" title="格式錯誤，請輸入正整數。" pattern="[1-9][\d]{0,2}?" name="minutes" placeholder="Enter Minutes"
+          required>
       </form>
     </div>
     <div class="display">
