@@ -44,9 +44,9 @@
     const button = document.querySelector('button');
     button.addEventListener('click', () => timeUp && startGame());
     function startGame() {
-      scoreBoard.textContent = 0;
       timeUp = false;
       score = 0;
+      scoreBoard.textContent = score;
       peep();
       setTimeout(() => timeUp = true, 10000);
     }
@@ -71,7 +71,6 @@
       lastHole = hole;
       return hole;
     }
-
     moles.forEach(mole => mole.addEventListener('click', (e) => e.isTrusted && bonk(e)));
     function bonk(e) {
       score++;
