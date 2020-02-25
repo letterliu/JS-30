@@ -1,9 +1,9 @@
 
-let score = 0, timeUp = true;
-
 const moles = [...document.querySelectorAll(".mole")];
 const status = { ...moles.map((moles, index) => moles[index] = false) };
-const molesProxy = new Proxy(status, {
+let score = 0, timeUp = true;
+
+const statusProxy = new Proxy(status, {
   get(target, key) {
     return target[key];
   },
@@ -20,13 +20,14 @@ const molesProxy = new Proxy(status, {
 });
 
 function handleClick() {
-  if (molesProxy[moles.indexOf(this)]) {
+  if (statusProxy[moles.indexOf(this)]) {
     setScore(++score);
-    molesProxy[moles.indexOf(this)] = false;
+    statusProxy[moles.indexOf(this)] = false;
   }
 };
 
-document.querySelector("button").addEventListener("click", () => timeUp && startGame());
+const button = document.querySelector("button");
+button.addEventListener("click", () => timeUp && startGame());
 function startGame() {
   setScore(0);
   timeUp = false;
@@ -42,11 +43,11 @@ function setScore(returnToZero) {
 function showRandomMole() {
   const mole = Math.floor(Math.random() * moles.length);
   const time = Math.random() * (1500 - 1000) + 1000; // 1000~1500
-  if (molesProxy[mole]) return showRandomMole();
+  if (statusProxy[mole]) return showRandomMole();
   setMole(mole, time);
 };
 function setMole(mole, time) {
-  molesProxy[mole] = true;
+  statusProxy[mole] = true;
   setTimeout(() => (!timeUp) && showRandomMole(), 500);
-  setTimeout(() => molesProxy[mole] = false, time);
+  setTimeout(() => statusProxy[mole] = false, time);
 };
